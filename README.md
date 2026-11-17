@@ -37,9 +37,49 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
 
+```
+from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
+<html>
+    <head>
+        <title>My Profile</title>
+    </head>
+    <body>
+  	<h1>Welcome</h1>	
+    <pre>
+	Name: <i>Alvina Inayath Sha</i>
+	Department: CSE
+	College: <b>Saveetha Engineering College</b>	
+
+	hello world ! 
+    </pre>
+    </body>
+</html>
+"""
+class myhandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Client request received")
+        self.send_response(200)
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+server_address = ('',8000)
+httpd = HTTPServer(server_address,myhandler)
+print("my own webserver is running successfully...")
+httpd.serve_forever()
+
+```
+
 
 ## OUTPUT:
 
+Webpage:
+
+![alt text](image.png)
+
+Webserver:
+
+![alt text](image-1.png)
 
 ## RESULT:
 The program for implementing simple webserver is executed successfully.
